@@ -21,7 +21,7 @@ fun App() {
 
     var sliderPosition by remember { mutableStateOf(20f) }
 
-    val timer = Timer()
+    val timer = Timer
 
         MaterialTheme {
             Column {
@@ -58,8 +58,8 @@ fun main() = application {
 }
 
 fun keyPressed() {
-    if(isEnabled.value && Status.valueOf(status.value.uppercase()) == Status.UNMUTED){
-        val timer = Timer()
+    if(isEnabled.value){
+        val timer = Timer
         timer.startTimer()
     }
 }

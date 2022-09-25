@@ -1,27 +1,37 @@
 import com.github.kwhat.jnativehook.GlobalScreen
 import enums.Status
+import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
-class Timer {
+object Timer {
+
+    val audioManager = AudioManager()
+    var countdown = 0L
 
     fun startTimer(){
+        if(countdown == 0L){
+            stopPlayback()
+        }
+        countdown = 3L
+
         GlobalScope.launch {
-            val audioManager = AudioManager()
-            audioManager.playPause()
-            changeStatus(Status.MUTED)
-
-            println("1st")
-
-            delay(2000)
-
-            println("2nd")
-
-            audioManager.playPause()
-            changeStatus(Status.UNMUTED)
+            while (countdown > 0L){
+                delay(1000)
+                countdown - 1
+            }
+            println(countdown.toString())
+            if(countdown == 0L) resumePlayback()
         }
     }
+
+    fun stopPlayback(){
+        audioManager.playPause()
+        changeStatus(Status.MUTED)
+    }
+
+    fun resumePlayback(){
+        audioManager.playPause()
+        changeStatus(Status.UNMUTED)
+    }
+
 }
