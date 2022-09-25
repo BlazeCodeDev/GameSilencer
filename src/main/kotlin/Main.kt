@@ -2,41 +2,71 @@
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Switch
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.input.key.NativeKeyEvent
+import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
-import com.github.kwhat.jnativehook.GlobalScreen
-import javax.swing.GroupLayout
+import enums.Status
+
+var isEnabled = mutableStateOf(false)
+var status = mutableStateOf("Unmuted")
 
 @Composable
 @Preview
 fun App() {
-    val checkedState = remember { mutableStateOf(false) }
+    val checkedState by isEnabled
+    val newStatus by status
 
-    MaterialTheme {
-        Row (verticalAlignment = Alignment.CenterVertically){
-            Text("isActive")
-            Switch(checked = checkedState.value,
-                onCheckedChange = {checkedState.value = it})
+    var sliderPosition by remember { mutableStateOf(20f) }
+
+    val timer = Timer()
+
+        MaterialTheme {
+            Column {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text("isActive")
+                    Switch(checked = isEnabled.value,
+                        onCheckedChange = { isEnabled.value = it })
+
+                    Text(newStatus)
+                }
+                Text(sliderPosition.toString().split(".")[0])
+                Row {
+
+                    Slider(
+                        value = sliderPosition,
+                        onValueChange = { sliderPosition = it},
+                        valueRange = 0F..45F,
+                        steps = 15)
+                }
+            }
+
         }
-
     }
-}
 
 fun main() = application {
     Window(
         onCloseRequest = ::exitApplication,
-    ){
+    ) {
         val keyListener = KeyListener()
         keyListener.init()
 
         App()
     }
+}
+
+fun keyPressed() {
+    if(isEnabled.value && Status.valueOf(status.value.uppercase()) == Status.UNMUTED){
+        val timer = Timer()
+        timer.startTimer()
+    }
+}
+
+fun changeStatus(newStatus: Status){
+    if(newStatus == Status.MUTED)
+        status.value = "Muted"
+    else status.value = "Unmuted"
 }
 

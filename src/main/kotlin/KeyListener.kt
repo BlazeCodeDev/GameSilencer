@@ -1,3 +1,4 @@
+import androidx.compose.runtime.Composable
 import com.github.kwhat.jnativehook.GlobalScreen
 import com.github.kwhat.jnativehook.NativeInputEvent.SHIFT_MASK
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent
@@ -21,6 +22,7 @@ class KeyListener : NativeKeyListener {
 
         if(isShiftDown(key) && isCurrentCharWASD){
             println("Ingame")
+            keyPressed()
         }
     }
 
