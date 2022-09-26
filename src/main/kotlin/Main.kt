@@ -11,6 +11,7 @@ import androidx.compose.ui.window.application
 import enums.Status
 
 var isEnabled = mutableStateOf(false)
+var sliderValue = mutableStateOf(0)
 var status = mutableStateOf("Unmuted")
 var time = mutableStateOf("0 ms")
 
@@ -40,7 +41,7 @@ fun App() {
 
                     Slider(
                         value = sliderPosition,
-                        onValueChange = { sliderPosition = it},
+                        onValueChange = { sliderPosition = it; sliderValue.value = sliderPosition.toInt()},
                         valueRange = 0F..45F,
                         steps = 15)
                 }
@@ -63,7 +64,7 @@ fun main() = application {
 fun keyPressed() {
     if(isEnabled.value){
         val timer = Timer
-        timer.startTimer()
+        timer.startTimer(sliderValue.value)
     }
 }
 
