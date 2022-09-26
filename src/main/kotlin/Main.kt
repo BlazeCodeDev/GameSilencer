@@ -42,8 +42,8 @@ fun App() {
                     Slider(
                         value = sliderPosition,
                         onValueChange = { sliderPosition = it; sliderValue.value = sliderPosition.toInt()},
-                        valueRange = 0F..45F,
-                        steps = 15)
+                        valueRange = 1F..45F,
+                        steps = 8)
                 }
             }
 
