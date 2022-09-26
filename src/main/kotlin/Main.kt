@@ -12,12 +12,14 @@ import enums.Status
 
 var isEnabled = mutableStateOf(false)
 var status = mutableStateOf("Unmuted")
+var time = mutableStateOf("0 ms")
 
 @Composable
 @Preview
 fun App() {
     val checkedState by isEnabled
     val newStatus by status
+    val newTime by time
 
     var sliderPosition by remember { mutableStateOf(20f) }
 
@@ -33,6 +35,7 @@ fun App() {
                     Text(newStatus)
                 }
                 Text(sliderPosition.toString().split(".")[0])
+                Text(newTime)
                 Row {
 
                     Slider(
@@ -68,5 +71,9 @@ fun changeStatus(newStatus: Status){
     if(newStatus == Status.MUTED)
         status.value = "Muted"
     else status.value = "Unmuted"
+}
+
+fun setTime(newTime: Long) {
+    time.value = "$newTime ms"
 }
 

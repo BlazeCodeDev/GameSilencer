@@ -9,18 +9,21 @@ object Timer {
     var countdown = 0L
 
     fun startTimer(){
-        if(countdown == 0L){
-            stopPlayback()
-        }
-        countdown = 3L
+        var currentMillis = System.currentTimeMillis()
+        var timerMillis = currentMillis + 3000
+
+        stopPlayback()
 
         GlobalScope.launch {
-            while (countdown > 0L){
-                delay(1000)
-                countdown - 1
+            while (!timerMillis.equals(0)) {
+                if (timerMillis <= currentMillis) {
+                    resumePlayback()
+                    timerMillis = 0
+                    break
+                }
+                currentMillis = System.currentTimeMillis()
+                setTime(timerMillis - currentMillis)
             }
-            println(countdown.toString())
-            if(countdown == 0L) resumePlayback()
         }
     }
 
