@@ -18,7 +18,10 @@ repositories {
 
 dependencies {
     implementation(compose.desktop.currentOs)
+    //KEY LISTENER
     implementation("com.github.kwhat:jnativehook:2.2.2")
+    //PROCESS LISTENER
+    implementation("net.java.dev.jna:jna-platform:5.12.1")
 }
 
 tasks.withType<KotlinCompile>() {
