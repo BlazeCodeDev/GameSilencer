@@ -113,6 +113,8 @@ fun keyPressed() {
         val timer = Timer
         timer.startTimer(sliderValue.value.toInt())
     }
+    val processListener = ProcessListener()
+    println(processListener.getActiveWindowTitle())
 }
 
 fun changeStatus(newStatus: Status){
