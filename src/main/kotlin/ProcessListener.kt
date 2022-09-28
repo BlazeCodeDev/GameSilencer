@@ -17,7 +17,11 @@ class ProcessListener {
     // "Rainbow Six"
     // "Counter-Strike: Global Offensive - Direct3D 9"
 
-    fun isGame(){
-
+    fun isGame(): Boolean{
+        when (getActiveWindowTitle()) {
+            "Rainbow Six" -> return true
+            "Counter-Strike: Global Offensive - Direct3D 9" -> return true
+            else -> return false
+        }
     }
 }
