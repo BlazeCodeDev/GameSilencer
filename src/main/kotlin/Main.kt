@@ -114,7 +114,7 @@ fun keyPressed() {
         timer.startTimer(sliderValue.value.toInt())
     }
     val processListener = ProcessListener()
-    println(processListener.getActiveWindowTitle())
+    println(processListener.getActiveWindowTitle() + " " + processListener.isGame())
 }
 
 fun changeStatus(newStatus: Status){
