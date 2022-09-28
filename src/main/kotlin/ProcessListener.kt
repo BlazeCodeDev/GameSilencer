@@ -19,6 +19,7 @@ class ProcessListener {
 
     fun isGame(): Boolean{
         when (getActiveWindowTitle()) {
+            "GameSilencer" -> return true     // FOR TESTING PURPOSES
             "Rainbow Six" -> return true
             "Counter-Strike: Global Offensive - Direct3D 9" -> return true
             else -> return false
