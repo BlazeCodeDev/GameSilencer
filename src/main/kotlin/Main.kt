@@ -117,6 +117,7 @@ fun main() = application {
         onCloseRequest = ::exitApplication,
         state = rememberWindowState(width = 500.dp, height = 300.dp),
         title = "GameSilencer",
+        icon = painterResource("ic_icon.png")
     ) {
         val keyListener = KeyListener()
         keyListener.init()
