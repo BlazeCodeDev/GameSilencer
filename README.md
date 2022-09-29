@@ -10,6 +10,9 @@ The muting duration can be changed between 1s and 45s
 
 The tool also counts it's own window as "ingame" for testing purposes.
 
+## Screenshot
+<img height=300 src="https://raw.githubusercontent.com/BlazeCodeDev/GameSilencer/master/screenshot.png" />
+
 ## Bugs / Feature requests
 If you encounter any bugs or have a suggestion on how to improve this little tool please open a GitHub issue in this repo. I'll try to answer / help out as soon as possible.
 
