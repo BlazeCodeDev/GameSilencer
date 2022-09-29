@@ -1,11 +1,12 @@
 
 import com.sun.jna.Native
 import com.sun.jna.platform.win32.User32
+import enums.GameStatus
 
 
 class ProcessListener {
 
-    fun getActiveWindowTitle(): String {
+    private fun getActiveWindowTitle(): String {
         val fgWindow = User32.INSTANCE.GetForegroundWindow()
         val titleLength = User32.INSTANCE.GetWindowTextLength(fgWindow) + 1
         val title = CharArray(titleLength)
@@ -17,12 +18,12 @@ class ProcessListener {
     // "Rainbow Six"
     // "Counter-Strike: Global Offensive - Direct3D 9"
 
-    fun isGame(): Boolean{
+    fun isGame(): GameStatus{
         when (getActiveWindowTitle()) {
-            "GameSilencer" -> return true     // FOR TESTING PURPOSES
-            "Rainbow Six" -> return true
-            "Counter-Strike: Global Offensive - Direct3D 9" -> return true
-            else -> return false
+            "GameSilencer" -> return GameStatus.INGAME     // FOR TESTING PURPOSES
+            "Rainbow Six" -> return GameStatus.INGAME
+            "Counter-Strike: Global Offensive - Direct3D 9" -> return GameStatus.INGAME
+            else -> return GameStatus.NOT_INGAME
         }
     }
 }

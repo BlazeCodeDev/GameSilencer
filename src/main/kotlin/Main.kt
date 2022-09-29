@@ -20,6 +20,7 @@ import androidx.compose.ui.window.MenuBar
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
+import enums.GameStatus
 import enums.Status
 import kotlin.system.exitProcess
 
@@ -27,6 +28,7 @@ var isEnabled = mutableStateOf(true)
 var sliderValue = mutableStateOf(20f)
 var status = mutableStateOf("ic_unmuted.svg")
 var time = mutableStateOf("0s")
+var currentGame = mutableStateOf("Not ingame")
 
 @Composable
 @Preview
@@ -34,6 +36,7 @@ fun App() {
     val checkedState by isEnabled
     val newStatus by status
     val newTime by time
+    val newCurrentGame by currentGame
 
     var sliderPosition by remember { mutableStateOf(20f) }
 
@@ -91,6 +94,20 @@ fun App() {
                         )
                     }
                 }
+
+                Card (backgroundColor = Color(0xFF422c42),
+                    shape = MaterialTheme.shapes.small,
+                    modifier = Modifier.padding(8.dp)){
+                    Row (horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically){
+                        Text("Current state: ",
+                            color = Color(0xFFe8e0e5),
+                            modifier = Modifier.padding(8.dp))
+                        Text(currentGame.value,
+                            color = Color(0xFFe8e0e5),
+                            modifier = Modifier.padding(8.dp))
+                    }
+                }
             }
         }
     }
@@ -109,18 +126,26 @@ fun main() = application {
 }
 
 fun keyPressed() {
-    if(isEnabled.value){
+    val processListener = ProcessListener()
+    val isIngame = processListener.isGame()
+    changeGameStatus(isIngame)
+
+    if(isEnabled.value && isIngame == GameStatus.INGAME){
         val timer = Timer
         timer.startTimer(sliderValue.value.toInt())
     }
-    val processListener = ProcessListener()
-    println(processListener.getActiveWindowTitle() + " " + processListener.isGame())
 }
 
 fun changeStatus(newStatus: Status){
     if(newStatus == Status.MUTED)
         status.value = "ic_muted.svg"
     else status.value = "ic_unmuted.svg"
+}
+
+fun changeGameStatus(newGameStatus: GameStatus) {
+    if(newGameStatus == GameStatus.INGAME)
+        currentGame.value = "Ingame" else
+        currentGame.value = "Not ingame"
 }
 
 fun setTime(newTime: Long) {
