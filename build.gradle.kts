@@ -32,9 +32,17 @@ compose.desktop {
     application {
         mainClass = "MainKt"
         nativeDistributions {
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+            targetFormats(TargetFormat.Exe, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "GameSilencer"
             packageVersion = "1.0.0"
+            windows {
+                // FOR ALL WINDOWS DISTIBUTABLES
+                packageVersion = "1.0.0"
+                // FOR MSI DISTIBUTABLE
+                msiPackageVersion = "1.0.0"
+                // FOR EXE DISTIBUTABLE
+                exePackageVersion = "1.0.0"
+            }
         }
     }
 }
