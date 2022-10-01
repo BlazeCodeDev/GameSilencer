@@ -34,14 +34,14 @@ compose.desktop {
         nativeDistributions {
             targetFormats(TargetFormat.Exe, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "GameSilencer"
-            packageVersion = "1.0.0"
+            packageVersion = "1.1.0"
             windows {
                 // FOR ALL WINDOWS DISTIBUTABLES
-                packageVersion = "1.0.0"
+                packageVersion = "1.1.0"
                 // FOR MSI DISTIBUTABLE
-                msiPackageVersion = "1.0.0"
+                msiPackageVersion = "1.1.0"
                 // FOR EXE DISTIBUTABLE
-                exePackageVersion = "1.0.0"
+                exePackageVersion = "1.1.0"
             }
         }
     }
