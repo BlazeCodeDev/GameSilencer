@@ -25,6 +25,7 @@ import enums.Status
 import kotlin.system.exitProcess
 
 var isEnabled = mutableStateOf(true)
+var useInGameCheck = mutableStateOf(true)
 var sliderValue = mutableStateOf(20f)
 var status = mutableStateOf("ic_unmuted.svg")
 var time = mutableStateOf("0s")
@@ -39,6 +40,7 @@ fun App() {
     val newCurrentGame by currentGame
 
     var sliderPosition by remember { mutableStateOf(20f) }
+    var useInGameCheck by mutableStateOf(useInGameCheck)
 
     val timer = Timer
 
@@ -80,7 +82,8 @@ fun App() {
                         verticalAlignment = Alignment.CenterVertically){
                         Text(sliderPosition.toString().split(".")[0] + "s",
                             color = Color(0xFFe8e0e5),
-                            modifier = Modifier.padding(8.dp))
+                            modifier = Modifier.padding(8.dp)
+                                .width(30.dp))
                         Slider(
                             value = sliderPosition,
                             onValueChange = { sliderPosition = it; sliderValue.value = sliderPosition},
@@ -97,15 +100,30 @@ fun App() {
 
                 Card (backgroundColor = Color(0xFF422c42),
                     shape = MaterialTheme.shapes.small,
-                    modifier = Modifier.padding(8.dp)){
-                    Row (horizontalArrangement = Arrangement.Center,
-                        verticalAlignment = Alignment.CenterVertically){
-                        Text("Current state: ",
+                    modifier = Modifier.padding(8.dp)
+                        .fillMaxWidth()){
+                    Row (verticalAlignment = Alignment.CenterVertically){
+                        Text("Use Ingame check" ,
                             color = Color(0xFFe8e0e5),
                             modifier = Modifier.padding(8.dp))
-                        Text(currentGame.value,
-                            color = Color(0xFFe8e0e5),
-                            modifier = Modifier.padding(8.dp))
+                        Switch(checked = useInGameCheck.value,
+                            onCheckedChange = { useInGameCheck.value = it },
+                            colors = SwitchDefaults.colors(
+                                checkedTrackColor = Color(0xFFf7d9ff),
+                                checkedThumbColor = Color(0xFFffffff),
+                                uncheckedTrackColor = Color(0xFF7d4996)
+                            ))
+
+                        Box(modifier = Modifier.fillMaxWidth(), Alignment.CenterEnd) {
+                            Row {
+                                Text("Current state: ",
+                                    color = Color(0xFFe8e0e5),
+                                    modifier = Modifier.padding(8.dp))
+                                Text(currentGame.value,
+                                    color = Color(0xFFe8e0e5),
+                                    modifier = Modifier.padding(8.dp))
+                            }
+                        }
                     }
                 }
             }
@@ -131,7 +149,8 @@ fun keyPressed() {
     val isIngame = processListener.isGame()
     changeGameStatus(isIngame)
 
-    if(isEnabled.value && isIngame == GameStatus.INGAME){
+    if((isEnabled.value && isIngame == GameStatus.INGAME && useInGameCheck.value) ||
+            isEnabled.value && !useInGameCheck.value){
         val timer = Timer
         timer.startTimer(sliderValue.value.toInt())
     }
