@@ -1,8 +1,7 @@
 import androidx.compose.runtime.mutableStateOf
-import com.github.kwhat.jnativehook.GlobalScreen
 import enums.Status
-import kotlinx.coroutines.*
-import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 object Timer {
 
