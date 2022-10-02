@@ -1,6 +1,6 @@
 # GameSilencer
 
-This is a small tool which mutes your media playback while playing certain games. It triggers when you try to run ingame, i.e. Shift + W/A/S/D.
+This is a small tool which mutes your media playback while playing certain games. It triggers when you try to run ingame, i.e. Shift/Alt + W/A/S/D.
 
 The muting duration can be changed between 1s and 45s
 
@@ -17,7 +17,7 @@ The tool also counts it's own window as "ingame" for testing purposes.
 If you encounter any bugs or have a suggestion on how to improve this little tool please open a GitHub issue in this repo. I'll try to answer / help out as soon as possible.
 
 ## Privacy
-This tool is essentially a key logger. It only listens to W/A/S/D and both your shift keys. When you press one of these combinations it also gets the title name of the currently focused window. It then compares the window name to a set list of names to determine whether it is a game or not.
+This tool is essentially a key logger. It only listens to W/A/S/D and both your shift and alt keys. When you press one of these combinations it also gets the title name of the currently focused window. It then compares the window name to a set list of names to determine whether it is a game or not.
 The tool never sends any information, it doesn't need an active internet connection to be able to work.
 
 ## License
