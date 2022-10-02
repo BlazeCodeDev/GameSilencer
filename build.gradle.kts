@@ -36,6 +36,7 @@ compose.desktop {
             packageName = "GameSilencer"
             packageVersion = "1.1.0"
             windows {
+                iconFile.set(project.file("ic_icon.png"))
                 // FOR ALL WINDOWS DISTIBUTABLES
                 packageVersion = "1.1.0"
                 // FOR MSI DISTIBUTABLE
