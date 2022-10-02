@@ -37,19 +37,19 @@ fun App() {
 
         MaterialTheme {
             Column (modifier = Modifier
-                .background(Color(0xFF1e1b1e))
+                .background(Color(0xFF2b2d42))
                 .fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ){
                 Box (contentAlignment = Alignment.Center, modifier = Modifier.fillMaxWidth()){
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text("Service Active", color = Color(0xFFe8e0e5))
+                        Text("Service Active", color = Color(0xFFedf2f4))
                         Switch(checked = isEnabled.value,
                             onCheckedChange = { isEnabled.value = it },
                             colors = SwitchDefaults.colors(
-                                checkedTrackColor = Color(0xFFf7d9ff),
-                                checkedThumbColor = Color(0xFFffffff),
-                                uncheckedTrackColor = Color(0xFF7d4996)
+                                checkedTrackColor = Color(0xFFef233c),
+                                checkedThumbColor = Color(0xFFff4f65),
+                                uncheckedTrackColor = Color(0xFFef233c)
                             ))
                     }
 
@@ -58,21 +58,21 @@ fun App() {
                         Icon(painter = painterResource(newStatus),
                             contentDescription = null,
                             modifier = Modifier.size(36.dp, 36.dp),
-                            tint = Color(0xFFe8e0e5))
+                            tint = Color(0xFFedf2f4))
                     }
                 }
 
                 Row(modifier = Modifier.align(Alignment.End).padding(8.dp),){
-                    Text(newTime, color = Color(0xFFe8e0e5))
+                    Text(newTime, color = Color(0xFFedf2f4))
                 }
 
-                Card (backgroundColor = Color(0xFF422c42),
+                Card (backgroundColor = Color(0xFF4a5569),
                     shape = MaterialTheme.shapes.small,
                     modifier = Modifier.padding(8.dp)){
                     Row (horizontalArrangement = Arrangement.Center,
                         verticalAlignment = Alignment.CenterVertically){
                         Text(sliderPosition.toString().split(".")[0] + "s",
-                            color = Color(0xFFe8e0e5),
+                            color = Color(0xFFedf2f4),
                             modifier = Modifier.padding(8.dp)
                                 .width(30.dp))
                         Slider(
@@ -81,37 +81,37 @@ fun App() {
                             valueRange = 1F..45F,
                             steps = 8,
                             colors = SliderDefaults.colors(
-                                thumbColor = Color(0xFFffffff),
-                                activeTrackColor = Color(0xFFf7d9ff),
-                                inactiveTrackColor = Color(0xFF310048)
+                                thumbColor = Color(0xFFff4f65),
+                                activeTrackColor = Color(0xFFef233c),
+                                inactiveTrackColor = Color(0xFF6b0013)
                             )
                         )
                     }
                 }
 
-                Card (backgroundColor = Color(0xFF422c42),
+                Card (backgroundColor = Color(0xFF4a5569),
                     shape = MaterialTheme.shapes.small,
                     modifier = Modifier.padding(8.dp)
                         .fillMaxWidth()){
                     Row (verticalAlignment = Alignment.CenterVertically){
                         Text("Use Ingame check" ,
-                            color = Color(0xFFe8e0e5),
+                            color = Color(0xFFedf2f4),
                             modifier = Modifier.padding(8.dp))
                         Switch(checked = useInGameCheck.value,
                             onCheckedChange = { useInGameCheck.value = it },
                             colors = SwitchDefaults.colors(
-                                checkedTrackColor = Color(0xFFf7d9ff),
-                                checkedThumbColor = Color(0xFFffffff),
-                                uncheckedTrackColor = Color(0xFF7d4996)
+                                checkedTrackColor = Color(0xFFef233c),
+                                checkedThumbColor = Color(0xFFff4f65),
+                                uncheckedTrackColor = Color(0xFFef233c)
                             ))
 
                         Box(modifier = Modifier.fillMaxWidth(), Alignment.CenterEnd) {
                             Row {
                                 Text("Current state: ",
-                                    color = Color(0xFFe8e0e5),
+                                    color = Color(0xFFedf2f4),
                                     modifier = Modifier.padding(8.dp))
                                 Text(currentGame.value,
-                                    color = Color(0xFFe8e0e5),
+                                    color = Color(0xFFedf2f4),
                                     modifier = Modifier.padding(8.dp))
                             }
                         }
