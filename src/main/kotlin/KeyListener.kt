@@ -1,4 +1,5 @@
 import com.github.kwhat.jnativehook.GlobalScreen
+import com.github.kwhat.jnativehook.NativeInputEvent.ALT_MASK
 import com.github.kwhat.jnativehook.NativeInputEvent.SHIFT_MASK
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent
 import com.github.kwhat.jnativehook.keyboard.NativeKeyListener
@@ -19,13 +20,17 @@ class KeyListener : NativeKeyListener {
                                 currentChar.equals("S") ||
                                 currentChar.equals("D")
 
-        if(isShiftDown(key) && isCurrentCharWASD){
+        if((isShiftDown(key) || isALtDown(key)) && isCurrentCharWASD){
             println("Ingame")
             keyPressed()
         }
     }
 
     private fun isShiftDown(e: NativeKeyEvent): Boolean {
-        return e.modifiers and SHIFT_MASK !== 0
+        return e.modifiers and SHIFT_MASK != 0
+    }
+
+    private fun isALtDown(e: NativeKeyEvent): Boolean {
+        return e.modifiers and ALT_MASK != 0
     }
 }
